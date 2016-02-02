@@ -1,0 +1,271 @@
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("../fonts/HelveticaNeueCyr-Medium.eot");
+  src: url("../fonts/HelveticaNeueCyr-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/HelveticaNeueCyr-Medium.woff") format("woff"), url("../fonts/HelveticaNeueCyr-Medium.ttf") format("truetype"), url("../fonts/HelveticaNeueCyr-Medium.svg#Helvetica Neue") format("svg");
+  font-weight: 500;
+  font-style: normal; }
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /* Using @include svg-font-face('FontName', 'font-filename', 400); */ }
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: none; }
+
+a, a:hover, input, textarea, select {
+  -webkit-tap-highlight-color: transparent;
+  outline: 0 none; }
+
+ol, ul {
+  list-style: none; }
+
+h1, h2, h3, h4, h5 {
+  font-weight: normal; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+:focus {
+  outline: 0; }
+
+a img, fieldset, hr {
+  border: 0; }
+
+a {
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease; }
+  a:hover {
+    text-decoration: none; }
+
+mark {
+  background: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+td {
+  vertical-align: middle; }
+
+input, select, textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  border-radius: 0;
+  width: 100%;
+  -webkit-appearance: none; }
+
+input[type="submit"], input[type="button"] {
+  cursor: pointer;
+  -webkit-appearance: none;
+  border: none;
+  width: auto; }
+
+/* Selection */
+::-moz-selection {
+  color: #fff;
+  background: #ff4e50; }
+
+::selection {
+  color: #fff;
+  background: #ff4e50; }
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #999; }
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #999;
+  opacity: 1; }
+
+hr {
+  clear: both;
+  font-size: 0;
+  overflow: hidden;
+  display: block;
+  height: 0; }
+
+body, html {
+  height: 100%; }
+
+main {
+  min-height: 100%; }
+
+* html main {
+  height: 100%; }
+
+.pusher {
+  clear: both; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
+  display: block; }
+
+.alignleft, .left {
+  float: left; }
+
+.alignright, .right {
+  float: right; }
+
+img.alignleft {
+  margin: 0 30px 10px 0; }
+
+img.alignright {
+  margin: 0 0 10px 30px; }
+
+.aligncenter {
+  margin-left: auto;
+  margin-right: auto; }
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; }
+
+header, footer {
+  float: left;
+  width: 100%; }
+
+.valign {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 94%; }
+
+.vfix {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  width: 0; }
+
+.wrap {
+  font-size: 0;
+  text-align: center;
+  margin: 0 -10px; }
+  .wrap .item {
+    display: inline-block;
+    vertical-align: top; }
+
+#menuopen {
+  background: rgba(255, 255, 255, 0);
+  border: medium none;
+  cursor: pointer;
+  display: none;
+  height: 25px;
+  position: absolute;
+  right: 0;
+  top: 29px;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  width: 23px;
+  z-index: 2000; }
+  #menuopen:before, #menuopen:after {
+    border-radius: 10px;
+    box-shadow: 0 3px 0 0 #fff, 0 15px 0 0 #fff;
+    -webkit-box-shadow: 0 3px 0 0 #fff, 0 15px 0 0 #fff;
+    -moz-box-shadow: 0 3px 0 0 #fff, 0 15px 0 0 #fff;
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease; }
+  #menuopen:after {
+    border-radius: 10px;
+    -webkit-box-shadow: 0 3px 0 0 #fff;
+    -moz-box-shadow: 0 3px 0 0 #fff;
+    -ms-box-shadow: 0 3px 0 0 #fff;
+    -o-box-shadow: 0 3px 0 0 #fff;
+    box-shadow: 0 3px 0 0 #fff;
+    content: "";
+    height: 3px;
+    position: absolute;
+    top: 6px;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease; }
+  #menuopen.active:before, #menuopen.active:after {
+    border-radius: 10px;
+    background: #fff;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    left: 0;
+    right: 0;
+    top: 0; }
+  #menuopen.active:before {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: rotate(-45deg) translate(-7px, 7px);
+    -moz-transform: rotate(-45deg) translate(-7px, 7px);
+    -ms-transform: rotate(-45deg) translate(-7px, 7px);
+    -o-transform: rotate(-45deg) translate(-7px, 7px);
+    transform: rotate(-45deg) translate(-7px, 7px); }
+  #menuopen.active:after {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: rotate(45deg) translate(7px, 7px);
+    -moz-transform: rotate(45deg) translate(7px, 7px);
+    -ms-transform: rotate(45deg) translate(7px, 7px);
+    -o-transform: rotate(45deg) translate(7px, 7px);
+    transform: rotate(45deg) translate(7px, 7px); }
+
+body {
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  background: #fff; }
+
+main {
+  overflow: hidden; }
+
+.container {
+  margin: 0 auto;
+  width: 1140px;
+  max-width: 94%;
+  position: relative; }
+
+#mainslider {
+  float: left;
+  width: 100%; }
+
+.content {
+  float: left;
+  width: 100%; }
+
+/*# sourceMappingURL=style.css.map */

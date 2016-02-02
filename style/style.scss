@@ -1,0 +1,75 @@
+@import "_reset";
+@import "_flexbox";
+
+$pageWidth: 1140px;
+$color: #ff4e50;
+$font: 'Helvetica Neue';
+
+html {
+  font-size: $font-base;
+}
+
+body {
+  font-family: $font, sans-serif;
+  font-weight: 400;
+  background: #fff;
+}
+
+main {
+  overflow: hidden;
+  position: relative;
+}
+
+.wrap {
+  margin: 0 auto;
+  width: $pageWidth;
+  max-width: 94%;
+  position: relative;
+  font-size: 0;
+}
+
+
+header {
+  #menu-menu {}
+}
+
+.slider {
+  float: left;
+  width: 100%;
+}
+
+
+.content {
+
+}
+
+
+footer {
+
+}
+
+
+.button {
+  &:hover {
+  }
+}
+
+
+
+
+
+@media screen and (max-width: 1024px) {}
+
+
+
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+
+
+
+@media screen and (max-width: 480px) {}
