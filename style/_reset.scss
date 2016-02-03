@@ -27,6 +27,20 @@ $font-base: 20px;
   &:-ms-input-placeholder      { @content; }
 }
 
+@mixin column ($width:30%, $count:0, $column_gap:0) {
+  -webkit-column-width: $width;
+  -moz-column-width: $width;
+  column-width: $width;
+
+  -webkit-column-count: $count;
+  -moz-column-count: $count;
+  column-count: $count;
+
+  -webkit-column-gap: $column_gap;
+  -moz-column-gap: $column_gap;
+  column-gap: $column_gap;
+}
+
 @mixin triangle ($width:12px, $height:10px, $color:#000, $direction: top) {
   position: absolute;
   content: '';
