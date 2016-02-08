@@ -538,6 +538,76 @@ header, .content, footer {
 }
 // menu
 
+// contact form 7 validation
+
+div.wpcf7 {
+  .wpcf7-form-control-wrap {
+    display: block !important;
+    margin-bottom: 20px;
+    clear: both;
+  }
+  .wpcf7-not-valid-tip {
+    background: #fff;
+    border: 1px solid #FF0000;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    font-family: $font;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+  }
+  .wpcf7-response-output {
+    float: left;
+    width: 100%;
+    margin: 10px 0 0 0;
+    font-family: $font;
+    line-height: 20px;
+    padding: 5px 20px;
+    text-align: center;
+    &.wpcf7-validation-errors {
+      background:#FF5F5F;
+      color:#fff
+    }
+    &.wpcf7-mail-sent-ng {
+      background:#1091ae;
+      color:#fff
+    }
+    &.wpcf7-mail-sent-ok {
+      background:#16A085;
+      color:#fff
+    }
+  }
+  .ajax-loader {
+    display: none;
+  }
+  input:not([type="submit"]), textarea {
+    width: 100%;
+    border: 1px solid #086195;
+    padding: 0 12px;
+    display: block;
+    height: 49px;
+    @include border-radius(5px);
+    margin: 0 auto 20px;
+    font: 400 16px $font;
+    @include placeholder {color: #999;}
+    &:focus {
+      background: rgba(8, 97, 149, 0.08);
+    }
+  }
+  textarea {
+    resize: none;
+    overflow: auto;
+    height: 150px;
+    padding: 10px;
+  }
+}
+
+// contact form 7 validation
+
 
 // fontastic
 
