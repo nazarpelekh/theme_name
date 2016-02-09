@@ -33,7 +33,7 @@ ob_start('ob_html_compress');
 
             <a href="tel:+1<?php echo preg_replace('/[^0-9]/', '', get_field("phone","option")); ?>" id="phone"><?php the_field("phone","option"); ?></a>
 
-            <div id="menuOpen">Menu</div>
+            <div id="menuOpen"></div>
             <nav id="mainMenu">
                 <?php wp_nav_menu(array('container' => false, 'items_wrap' => '<ul id="%1$s">%3$s</ul>', 'theme_location'  => 'main_menu')); ?>
             </nav>
