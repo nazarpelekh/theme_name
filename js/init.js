@@ -19,7 +19,7 @@ $(document).ready(function () {
     /* Mob Menu */
     $("#menuOpen").click(function () {
         $(this).toggleClass('active');
-        $('#menu-main-manu').slideToggle(400);
+        $('#menu-main-menu').slideToggle(400);
         return false;
     });
 
