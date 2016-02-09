@@ -480,6 +480,8 @@ header, .content, footer {
 }
 
 
+$menu_color: #fff;
+
 // menu
 #menuOpen {
   background: rgba(255, 255, 255, 0);
@@ -495,9 +497,9 @@ header, .content, footer {
   z-index: 2000;
   &:before, &:after {
     border-radius: 10px;
-    box-shadow: 0 3px 0 0 #fff, 0 15px 0 0 #fff;
-    -webkit-box-shadow: 0 3px 0 0 #fff, 0 15px 0 0 #fff;
-    -moz-box-shadow: 0 3px 0 0 #fff, 0 15px 0 0 #fff;
+    box-shadow: 0 3px 0 0 $menu_color, 0 15px 0 0 $menu_color;
+    -webkit-box-shadow: 0 3px 0 0 $menu_color, 0 15px 0 0 $menu_color;
+    -moz-box-shadow: 0 3px 0 0 $menu_color, 0 15px 0 0 $menu_color;
     content: "";
     height: 3px;
     left: 0;
@@ -508,7 +510,7 @@ header, .content, footer {
   }
   &:after {
     border-radius: 10px;
-    @include box-shadow(0 3px 0 0 #fff);
+    @include box-shadow(0 3px 0 0 $menu_color);
     content: "";
     height: 3px;
     position: absolute;
@@ -517,7 +519,7 @@ header, .content, footer {
   }
   &.active:before, &.active:after {
     border-radius: 10px;
-    background: #fff;
+    background: $menu_color;
     @include box-shadow(none);
     left: 0;
     right: 0;
@@ -537,6 +539,7 @@ header, .content, footer {
   }
 }
 // menu
+
 
 // contact form 7 validation
 
