@@ -3,6 +3,9 @@
 // Recommended plugins installer
 require_once 'include/plugins/init.php';
 
+// Custom admin area functions
+require_once('include/admin-assets/admin-addons.php');
+
 function style_js()
 {
     // Use script in current template
