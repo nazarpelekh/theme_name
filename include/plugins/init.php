@@ -210,6 +210,11 @@ function my_theme_register_required_plugins()
             'slug' => 'rvg-optimize-database',
             'required' => false,
         ),
+        array(
+            'name' => 'Add Logo to Admin',
+            'slug' => 'add-logo-to-admin',
+            'required' => false,
+        ),
 
         array(
             'name' => 'Advanced Custom Fields: PRO',
