@@ -58,7 +58,7 @@ if(function_exists('acf_add_options_page') ) {
 }
 
 //Thumbnails theme support
-//add_theme_support( 'post-thumbnails' );
+add_theme_support( 'post-thumbnails' );
 
 //images sizes
 //add_image_size( 'image_name', 'x', 'y', true );
