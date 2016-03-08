@@ -4,7 +4,7 @@
 require_once 'include/plugins/init.php';
 
 // Custom admin area functions
-//require_once('include/admin-assets/admin-addons.php');
+require_once('include/admin-assets/admin-addons.php');
 
 function style_js()
 {
@@ -26,8 +26,8 @@ function my_deregister_scripts(){
 }
 
 //custom theme url
-function theme(){
-    return bloginfo('stylesheet_directory');
+function theme($filepath = NULL){
+    return preg_replace( '(https?://)', '//', get_stylesheet_directory_uri() . ($filepath?'/' . $filepath:'') );
 }
 
 //register menus
