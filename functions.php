@@ -14,9 +14,10 @@ function style_js()
         wp_enqueue_script( 'google-map' );
     }*/
     wp_enqueue_script('init', get_template_directory_uri() . '/js/init.js', array('jquery'), '1.0', true);
-    wp_enqueue_script('lib', get_template_directory_uri() . '/js/lib.js', array('jquery'), '1.0', true);
+    /*    wp_enqueue_style('swiper.min', get_template_directory_uri() . '/style/swiper.min.css');*/
     wp_enqueue_style('style', get_template_directory_uri() . '/style/style.css');
-/*    wp_enqueue_style('swiper.min', get_template_directory_uri() . '/style/swiper.min.css');*/
+    wp_enqueue_script('lib', get_template_directory_uri() . '/js/lib.js', array('jquery'), '1.0', true);
+
 }
 add_action('wp_enqueue_scripts', 'style_js');
 
