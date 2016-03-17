@@ -30,7 +30,7 @@ ob_start('ob_html_compress');
     <header>
         <div class="wrap">
             <a id="logo" href="<?php echo get_option('home') ?>">
-                <img src="<?php theme('images/logo.png'); ?>" alt="logo">
+                <img src="<?php echo theme('images/logo.png'); ?>" alt="logo">
             </a>
 
             <a href="tel:+1<?php echo preg_replace('/[^0-9]/', '', get_field("phone","option")); ?>" id="phone"><?php the_field("phone","option"); ?></a>
