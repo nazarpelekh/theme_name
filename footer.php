@@ -1,4 +1,3 @@
-<div class="pusher"></div>
 </main>
 <footer>
     <div class="wrap">
