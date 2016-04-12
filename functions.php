@@ -184,4 +184,16 @@ function image_src($id, $size = 'full', $background_image = false, $height = fal
     }
 }
 
+// SVG
+function cc_mime_types($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
+
+function wpa_fix_svg_thumb() {
+    echo '<style>td.media-icon img[src$=".svg"], img[src$=".svg"].attachment-post-thumbnail {width: 100% !important;height: auto !important}</style>';
+}
+add_action('admin_head', 'wpa_fix_svg_thumb');
+
 ?>
