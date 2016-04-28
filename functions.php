@@ -94,9 +94,10 @@ function my_remove_recent_comments_style() {
     remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
 }
 
-//Body class
-function new_body_classes( $classes ){
+/* ===== New Body Classes ===== */
+function wpa_body_classes( $classes ){
     if( is_page() ){
+        global $post;
         $temp = get_page_template();
         if ( $temp != null ) {
             $path = pathinfo($temp);
@@ -104,18 +105,84 @@ function new_body_classes( $classes ){
             $tn= str_replace(".php", "", $tmp);
             $classes[] = $tn;
         }
-        global $post;
-        $classes[] = 'page-'.get_post($post)->post_name;
-        if (is_active_sidebar('sidebar')) {
-            $classes[] = 'with_sidebar';
+//        if (is_active_sidebar('sidebar')) {
+//            $classes[] = 'with_sidebar';
+//        }
+        foreach($classes as $k => $v) {
+            if(
+                $v == 'page-template' ||
+                $v == 'page-id-'.$post->ID ||
+                $v == 'page-template-default' ||
+                $v == 'woocommerce-page' ||
+                ($temp != null?($v == 'page-template-'.$tn.'-php' || $v == 'page-template-'.$tn):'')) unset($classes[$k]);
         }
     }
-    if(is_page() && !is_front_page() || is_single()) {$classes[] = 'static-page';}
+    if( is_single() ){
+        global $post;
+        $f = get_post_format( $post->ID );
+        foreach($classes as $k => $v) {
+            if($v == 'postid-'.$post->ID || $v == 'single-format-'.(!$f?'standard':$f)) unset($classes[$k]);
+        }
+    }
+    if ( is_multi_author() ) {
+        $classes[] = 'group-blog';
+    }
     global $is_lynx, $is_gecko, $is_IE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone;
-    if($is_lynx) $classes[] = 'lynx';elseif($is_gecko) $classes[] = 'gecko';elseif($is_opera) $classes[] = 'opera';elseif($is_NS4) $classes[] = 'ns4';elseif($is_safari) $classes[] = 'safari';elseif($is_chrome) $classes[] = 'chrome';elseif($is_IE) $classes[] = 'ie';else $classes[] = 'unknown';if($is_iphone) $classes[] = 'iphone';
+    $browser = $_SERVER[ 'HTTP_USER_AGENT' ];
+    // Mac, PC ...or Linux
+    if ( preg_match( "/Mac/", $browser ) ){
+        $classes[] = 'macos';
+    } elseif ( preg_match( "/Windows/", $browser ) ){
+        $classes[] = 'windows';
+    } elseif ( preg_match( "/Linux/", $browser ) ) {
+        $classes[] = 'linux';
+    } else {
+        $classes[] = 'unknown-os';
+    }
+    // Checks browsers in this order: Chrome, Safari, Opera, MSIE, FF
+    if ( preg_match( "/Edge/", $browser ) ) {
+        $classes[] = 'edge';
+    } elseif ( preg_match( "/Chrome/", $browser ) ) {
+        $classes[] = 'chrome';
+        preg_match( "/Chrome\/(\d.\d)/si", $browser, $matches);
+        @$classesh_version = 'ch' . str_replace( '.', '-', $matches[1] );
+        $classes[] = $classesh_version;
+    } elseif ( preg_match( "/Safari/", $browser ) ) {
+        $classes[] = 'safari';
+        preg_match( "/Version\/(\d.\d)/si", $browser, $matches);
+        $sf_version = 'sf' . str_replace( '.', '-', $matches[1] );
+        $classes[] = $sf_version;
+    } elseif ( preg_match( "/Opera/", $browser ) ) {
+        $classes[] = 'opera';
+        preg_match( "/Opera\/(\d.\d)/si", $browser, $matches);
+        $op_version = 'op' . str_replace( '.', '-', $matches[1] );
+        $classes[] = $op_version;
+    } elseif ( preg_match( "/MSIE/", $browser ) ) {
+        $classes[] = 'msie';
+        if( preg_match( "/MSIE 6.0/", $browser ) ) {
+            $classes[] = 'ie6';
+        } elseif ( preg_match( "/MSIE 7.0/", $browser ) ){
+            $classes[] = 'ie7';
+        } elseif ( preg_match( "/MSIE 8.0/", $browser ) ){
+            $classes[] = 'ie8';
+        } elseif ( preg_match( "/MSIE 9.0/", $browser ) ){
+            $classes[] = 'ie9';
+        }
+    } elseif ( preg_match( "/Firefox/", $browser ) && preg_match( "/Gecko/", $browser ) ) {
+        $classes[] = 'firefox';
+        preg_match( "/Firefox\/(\d)/si", $browser, $matches);
+        $ff_version = 'ff' . str_replace( '.', '-', $matches[1] );
+        $classes[] = $ff_version;
+    } else {
+        $classes[] = 'unknown-browser';
+    }
+    //qtranslate classes
+    if(defined('QTX_VERSION')) {
+        $classes[] = 'qtrans-' . qtranxf_getLanguage();
+    }
     return $classes;
 }
-add_filter( 'body_class', 'new_body_classes' );
+add_filter( 'body_class', 'wpa_body_classes' );
 
 //remove ID in menu list
 add_filter('nav_menu_item_id', 'clear_nav_menu_item_id', 10, 3);
