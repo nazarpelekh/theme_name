@@ -144,15 +144,24 @@ function get_post_content($pid = 0)
     }
 }
 
-//custom SEO title
-function seo_title(){
+/* ===== Custom SEO Title ===== */
+function wpa_title(){
     global $post;
-    if($post->post_parent) {
-        $parent_title = get_the_title($post->post_parent);
-        echo wp_title('-', true, 'right') . $parent_title.' - ';
+    if(!defined('WPSEO_VERSION')) {
+        if(is_404()) {
+            echo '404 Page not found - ';
+        } elseif((is_single() || is_page()) && $post->post_parent) {
+            $parent_title = get_the_title($post->post_parent);
+            echo wp_title('-', true, 'right') . $parent_title.' - ';
+        } elseif(class_exists('Woocommerce') && is_shop()) {
+            echo get_the_title(SHOP_ID) . ' - ';
+        } else {
+            wp_title('-', true, 'right');
+        }
+        bloginfo('name');
     } else {
-        wp_title('-', true, 'right');
-    } bloginfo('name');
+        wp_title();
+    }
 }
 
 /* Update wp-scss setings
@@ -162,6 +171,40 @@ if (class_exists('Wp_Scss_Settings')) {
     if (empty($wpscss['css_dir']) && empty($wpscss['scss_dir'])) {
         update_option('wpscss_options', array('css_dir' => '/style/', 'scss_dir' => '/style/', 'compiling_options' => 'scss_formatter_compressed'));
     }
+}
+
+// echo img
+function image_src($id, $size = 'full', $background_image = false, $height = false) {
+    if ($image = wp_get_attachment_image_src($id, $size, true)) {
+        return $background_image ? 'background-image: url('.$image[0].');' . ($height?'height:'.$image[2].'px':'') : $image[0];
+    }
+}
+
+// SVG to WP
+function cc_mime_types($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
+
+function wpa_fix_svg_thumb() {
+    echo '<style>td.media-icon img[src$=".svg"], img[src$=".svg"].attachment-post-thumbnail {width: 100% !important;height: auto !important}</style>';
+}
+add_action('admin_head', 'wpa_fix_svg_thumb');
+
+// Contact form 7 remove <p>&<br>
+if(defined('WPCF7_VERSION')) {
+    function maybe_reset_autop( $form ) {
+        $form_instance = WPCF7_ContactForm::get_current();
+        $manager = WPCF7_ShortcodeManager::get_instance();
+        $form_meta = get_post_meta( $form_instance->id(), '_form', true );
+        $form = $manager->do_shortcode( $form_meta );
+        $form_instance->set_properties( array(
+            'form' => $form
+        ) );
+        return $form;
+    }
+    add_filter( 'wpcf7_form_elements', 'maybe_reset_autop' );
 }
 
 function soc(){ ?>
@@ -176,24 +219,4 @@ function soc(){ ?>
             <a class="icon-google-plus" href="<?php echo $google; ?>" target="_blank"></a>
         <?php } ?>
     </div>
-<?php }
-
-function image_src($id, $size = 'full', $background_image = false, $height = false) {
-    if ($image = wp_get_attachment_image_src($id, $size, true)) {
-        return $background_image ? 'background-image: url('.$image[0].');' . ($height?'height:'.$image[2].'px':'') : $image[0];
-    }
-}
-
-// SVG
-function cc_mime_types($mimes) {
-    $mimes['svg'] = 'image/svg+xml';
-    return $mimes;
-}
-add_filter('upload_mimes', 'cc_mime_types');
-
-function wpa_fix_svg_thumb() {
-    echo '<style>td.media-icon img[src$=".svg"], img[src$=".svg"].attachment-post-thumbnail {width: 100% !important;height: auto !important}</style>';
-}
-add_action('admin_head', 'wpa_fix_svg_thumb');
-
-?>
+<?php } ?>
