@@ -38,7 +38,7 @@ $(document).ready(function () {
         }
     });
     
-    /* respond Menu */
+    /* Respond Menu */
     if ($("body").width() < 1024) {
     $("#mainMenu .menu-item-has-children > a").append("<span></span>");
     $("#mainMenu .menu-item-has-children span").click(function() {
