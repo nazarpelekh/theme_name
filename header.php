@@ -37,6 +37,8 @@ ob_start('ob_html_compress');
 
             <div id="menuOpen"></div>
 
-            <?php wp_nav_menu(array('container' => false, 'items_wrap' => '<ul id="%1$s">%3$s</ul>', 'theme_location'  => 'main_menu')); ?>
+            <div id="mainManu">
+                <?php wp_nav_menu(array('container' => false, 'items_wrap' => '<ul id="%1$s">%3$s</ul>', 'theme_location'  => 'main_menu')); ?>
+            </div>
         </div>
     </header>
