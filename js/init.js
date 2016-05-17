@@ -37,5 +37,15 @@ $(document).ready(function () {
             $('#menu-main-menu').removeAttr('style');
         }
     });
+    
+    /* respond Menu */
+    if ($("body").width() < 1024) {
+    $("#mainMenu .menu-item-has-children > a").append("<span></span>");
+    $("#mainMenu .menu-item-has-children span").click(function() {
+        $(this).parent().next().slideToggle(300);
+        $(this).toggleClass("active");
+        return false;
+    });
+}
 
 });
