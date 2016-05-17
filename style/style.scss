@@ -56,7 +56,99 @@ footer {
 
 
 
-
+@media screen and (min-width: 1025px) {
+  #mainMenu {
+    margin-left: 160px;
+    > ul {
+      font-size: 0;
+      @include flexbox;
+      @include justify-content(space-between);
+      > li {
+        position: relative;
+        > a {
+          font-size: rem(16);
+          display: block;
+          text-transform: uppercase;
+          line-height: 100px;
+          color: #000;
+          font-weight: 700;
+          padding: 0 20px;
+        }
+        &:after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 7px;
+          background: #ef3910;
+          visibility: hidden;
+          opacity: 0;
+          @include transition();
+        }
+        &:hover, &.current-menu-item {
+          &:after {
+            visibility: visible;
+            opacity: 1;
+          }
+          a {
+            text-decoration: none;
+          }
+        }
+        &.current-menu-item {
+          background: #f8f8f8;
+          @include box-shadow(inset 0px 0px 50px 20px rgba(231,231,231,1));
+        }
+        &.menu-item-has-children a {
+          &:after {
+            display: inline-block;
+          }
+        }
+        &:hover > ul {
+          margin-top: 0;
+          opacity: 1;
+          visibility: visible;
+          z-index: 50;
+        }
+        ul {
+          margin-top: 20px;
+          opacity: 0;
+          visibility: hidden;
+          width: 230px;
+          position: absolute;
+          left: 0px;
+          top: 100%;
+          background: rgba(215, 215, 215, 0.80);
+          font-size: 14px;
+          @include transition();
+          li {
+            position: relative;
+            a {
+              display: block;
+              padding: 5px 16px;
+              color: $color;
+              text-decoration: none;
+            }
+            &:hover, &.current-menu-item {
+              > a {
+                color: #303030;
+              }
+            }
+            &:hover ul {
+              visibility: visible;
+              opacity: 1;
+              margin-top: 0;
+            }
+            ul {
+              left: 230px;
+              top: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 1024px) {}
 
