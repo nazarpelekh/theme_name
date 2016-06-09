@@ -46,6 +46,18 @@ function tt_media_display_column( $columns ) {
     return $columns;
 }
 
+// Custom Image Sizes to Media Editor
+function wpa_custom_image_choose( $sizes ) {
+    global $_wp_additional_image_sizes;
+    $custom = array();
+    if(isset($_wp_additional_image_sizes)) {
+        foreach( $_wp_additional_image_sizes as $key => $value ) {
+            $custom[ $key ] = ucwords( str_replace( array('-', '_'), ' ', $key ) );
+        }
+    }
+    return array_merge( $sizes, $custom );
+}
+add_filter( 'image_size_names_choose', 'wpa_custom_image_choose', 999 );
 
 function tt_media_update() {
     // Update
