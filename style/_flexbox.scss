@@ -175,7 +175,7 @@
     @include flex-flow(wrap);
     @include transition();
     @include flexbox();
-    margin: 0 -$sideMargin;
+    margin: 0 0 -$sideMargin;
     width: $contentPercent + $spacingPercent;
     > * {
         width: ($contentPercent/$columnNumber) - $spacingPercent;
