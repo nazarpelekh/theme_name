@@ -420,11 +420,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, nav, sectio
   display: block
 }
 
-.alignleft, .left {
+.alignleft {
   float: left;
 }
 
-.alignright, .right {
+.alignright {
   float: right;
 }
 
@@ -448,7 +448,6 @@ img {
 }
 
 header, .content, footer {
-  float: left;
   width: 100%;
 }
 
