@@ -1,9 +1,4 @@
-@import "_reset";
-@import "_flexbox";
-
-$pageWidth: 1140px;
-$color: #ff4e50;
-$font: 'Helvetica Neue';
+@import '_reset';
 
 html {
   font-size: $font-base;
@@ -150,7 +145,128 @@ footer {
   }
 }
 
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 1023px) {
+  #mainMenu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    @include transform(translateX(100%));
+    @include transition();
+    background: rgb(26, 26, 26);
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    z-index: 999;
+    margin-top: 90px;
+    padding-bottom: 20px;
+    &.active {
+      @include transform(translateX(0));
+    }
+    ul {
+      li {
+        display: inline-block;
+        width: 100%;
+        margin: 0;
+        a {
+          margin: 0;
+          color: #fff;
+          font-size: 18px;
+          padding: 15px 3%;
+          border-bottom: 1px solid #000;
+          position: relative;
+          display: block;
+          text-decoration: none;
+          &:after {
+            display: none;
+          }
+        }
+        &:hover > a {
+          background: none;
+          color: #fff;
+        }
+        &.menu-item-has-children > a {
+          &:after {
+            display: none;
+          }
+        }
+        span {
+          width: 60px;
+          background: #f6542f;
+          position: absolute;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          cursor: pointer;
+          &:before {
+            content: "";
+            @include center();
+            background: #fff;
+            width: 18px;
+            height: 2px;
+            @include transition();
+          }
+          &:after {
+            content: "";
+            @include center();
+            background: #fff;
+            width: 2px;
+            height: 18px;
+            @include transition();
+          }
+          &.active {
+            &:after {
+              opacity: 0;
+            }
+          }
+        }
+        ul {
+          margin-top: 0;
+          opacity: 1;
+          visibility: visible;
+          width: 100%;
+          position: static;
+          background: none;
+          display: none;
+          @include transition(none);
+          li {
+            display: inline-block;
+            float: none;
+            width: 100%;
+            padding-bottom: 0;
+            a {
+              margin: 0;
+              color: #fff;
+              font-size: 18px;
+              padding: 10px 3%;
+              border-bottom: 1px solid #000;
+              position: relative;
+              text-decoration: none;
+            }
+            span {
+              background: none;
+            }
+            &:hover a {
+              background: none;
+              color: #fff;
+            }
+            &.current-menu-item a {
+              background: #f6542f;
+              color: #fff;
+            }
+            ul {
+              li {
+                a {
+                  font-size: 16px;
+                  font-style: italic;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 
 

@@ -26,7 +26,7 @@ ob_start('ob_html_compress');
     <link rel="icon" type="image/x-icon" href="<?php echo theme('images/favicon.png'); ?>" sizes="16x16">
     <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?>  data-hash="<?php wpa_fontbase64(true); ?>" data-a="<?php echo admin_url('admin-ajax.php'); ?>">
 <main>
     <header>
         <div class="wrap">

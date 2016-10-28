@@ -19,23 +19,18 @@ $(document).ready(function () {
         loop: true
     });
 
-    /* Respond view */
-    $(function() {
-        FastClick.attach(document.body);
-    });
-
-    /* Mob Menu */
-    $("#menuOpen").click(function () {
-        $(this).toggleClass('active');
-        $('#menu-main-menu').stop().slideToggle(400);
-        return false;
-    });
-
     /* Resize Menu */
     $(window).bind('resize orientationchange', function () {
         if ($(window).width() >= 768 ) {
             $('#menu-main-menu').removeAttr('style');
         }
+    });
+
+    /* Respond Menu */
+    $('#menuOpen').click(function() {
+        $(this).toggleClass('active');
+        $('#mainMenu').toggleClass('active');
+        $('body').css('overflow','hidden');
     });
     
     /* Respond Menu */
