@@ -1,5 +1,7 @@
 <?php
 
+define ('GOOGLEMAPS', FALSE);
+
 // Recommended plugins installer
 require_once 'include/plugins/init.php';
 
@@ -16,6 +18,11 @@ function style_js()
         wp_register_script( 'google-map', "//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=en", '', null );
         wp_enqueue_script( 'google-map' );
     }*/
+    
+    if(defined('GOOGLEMAPS')) {
+        wp_enqueue_script('googlemaps', '//maps.googleapis.com/maps/api/js?v=3.exp&language=en&key=AIzaSyAO77hGcvxmsvOn1RSjDFQMI4YUnW89MDo', false, null, false);
+    }
+    
     wp_enqueue_script('init', get_template_directory_uri() . '/js/init.js', array('jquery'), '1.0', true);
     /*    wp_enqueue_style('swiper.min', get_template_directory_uri() . '/style/swiper.min.css');*/
     wp_enqueue_style('style', get_template_directory_uri() . '/style/style.css');
@@ -321,6 +328,115 @@ if(defined('WPCF7_VERSION')) {
     }
     add_filter( 'wpcf7_form_elements', 'maybe_reset_autop' );
 }
+
+// Google Maps
+if(defined('GOOGLEMAPS')) {
+    /* google map shortcode
+        *** Using [googlemap id="somemapid" coordinates="1 ,1" zoom="17" height="500px" infobox="<p>Some Infobox Content</p>"]
+        *** if need street view, please add 'streetview="true"';
+        *** if you need satellite view in 45 angle add 'tilt="45"';
+        
+        <?php if ($contact_map = get_field('contact_map', 'option')) { ?>
+		    <?php echo do_shortcode('[googlemap id="contact_map" height="750px" icon="" coordinates="' .$contact_map['lat']. ', ' .$contact_map['lng']. '"][/googlemap]'); ?>
+	    <?php } ?>
+        
+    */
+    function google_map_js($atts, $content) {
+        extract(shortcode_atts(array(
+            'id'                => 'map_canvas',
+            'coordinates'       => '1, 1',
+            'zoom'              => 15,
+            'height'            => '350px',
+            'zoomcontrol'       => 'false',
+            'scrollwheel'       => 'false',
+            'scalecontrol'      => 'false',
+            'disabledefaultui'  => 'false',
+            'infobox'           => '',
+            'satellite'         => '',
+            'tilt'              => '',
+            'icon'              => theme().'/images/marker.png',
+            'streetview'        => ''
+        ), $atts));
+        $mapid = str_replace('-','_',$id);
+
+        $map = !$streetview?'<div class="googlemap" id="'.$id.'" '.($height?'style="height:'.$height.'"':'').'></div><script>
+    var '.$mapid.';
+    function initialize_'.$mapid.'() {
+        var myLatlng = new google.maps.LatLng('.$coordinates.');
+        var mapOptions = {
+            '.($satellite?'mapTypeId: google.maps.MapTypeId.SATELLITE,':'').'
+            zoom: '.$zoom.',
+            center: myLatlng,
+            zoomControl: '.$zoomcontrol.',
+            scrollwheel: '.$scrollwheel.',
+            scaleControl: '.$scalecontrol.',
+            disableDefaultUI: '.$disabledefaultui.'
+            '.( $content ? ',styles:'.$content : '' ).'
+        };
+        var '.$mapid.' = new google.maps.Map(document.getElementById("'.$id.'"), mapOptions);
+        '.($tilt?$mapid.'.setTilt(45);':'').'
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: '.$mapid.',
+            '.($icon?'icon:"'.$icon.'",':'').'
+            animation: google.maps.Animation.DROP
+        });
+        '.($infobox?'marker.info = new google.maps.InfoWindow({content: \''.javascript_escape($infobox).'\'});
+        google.maps.event.addListener(marker, "click", function() {marker.info.open('.$mapid.', marker);});':'').'
+
+        google.maps.event.addListener('.$mapid.', "center_changed", function() {
+            window.setTimeout(function() {
+                '.$mapid.'.panTo(marker.getPosition());
+            }, 15000);
+        });
+    };
+    google.maps.event.addDomListener(window, "load", initialize_'.$mapid.');
+    </script>':do_streetView_map($id, $coordinates, $height, $streetview);
+        return $map;
+    }
+    add_shortcode('googlemap', 'google_map_js');
+
+    function do_streetView_map($id, $pos, $height, $streetview){
+        return '<div class="googlemap" id="street_'.$id.'" '.($height?'style="height:'.$height.'"':'').'></div><script>
+        function street_init_'.$id.'() {
+
+
+        var geocoder =  new google.maps.Geocoder();
+        geocoder.geocode( { "address": "'.$streetview.'" }, function(results, status) {
+            var lookTo = results[0].geometry.location;
+            if (status == google.maps.GeocoderStatus.OK) {
+                  var panoOptions = {
+                    position: lookTo,
+                    panControl: false,
+                    addressControl: false,
+                    linksControl: false,
+                    zoomControlOptions: false
+                  };
+                  var pano = new  google.maps.StreetViewPanorama(document.getElementById("street_'.$id.'"),panoOptions);
+                  var service = new google.maps.StreetViewService;
+                  service.getPanoramaByLocation(pano.getPosition(), 50, function(panoData) {
+                    if (panoData != null) {
+                      var panoCenter = panoData.location.latLng;
+                      var heading = google.maps.geometry.spherical.computeHeading(panoCenter, lookTo);
+                      var pov = pano.getPov();
+                      pov.heading = heading;
+                      pano.setPov(pov);
+                      var marker = new google.maps.Marker({
+                        map: pano,
+                        position: lookTo
+                      });
+                    } else {
+                      alert("Not Found");
+                    }
+                  });
+            } else {
+                alert("Could not find your address");
+            }
+        });
+        }
+        google.maps.event.addDomListener(window, "load", street_init_'.$id.');</script>';
+    }
+} //end GOOGLEMAPS
 
 // Shortcode button
 function content_btn($atts,$content){
