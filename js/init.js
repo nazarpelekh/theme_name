@@ -33,14 +33,43 @@ $(document).ready(function () {
         $('body').css('overflow','hidden');
     });
     
-    /* Respond Menu */
     if ($("body").width() < 1024) {
-    $("#mainMenu .menu-item-has-children > a").append("<span></span>");
-    $("#mainMenu .menu-item-has-children span").click(function() {
-        $(this).parent().next().slideToggle(300);
-        $(this).toggleClass("active");
-        return false;
-    });
-}
+        
+        /* Respond Menu */
+        $("#mainMenu .menu-item-has-children > a").append("<span></span>");
+        $("#mainMenu .menu-item-has-children span").click(function() {
+            $(this).parent().next().slideToggle(300);
+            $(this).toggleClass("active");
+            return false;
+        });
+        
+        /* turn off hover on mobile view */
+        var touch = 'ontouchstart' in document.documentElement
+            || navigator.maxTouchPoints > 0
+            || navigator.msMaxTouchPoints > 0;
+
+        if (touch) { // remove all :hover stylesheets
+            try { // prevent exception on browsers not supporting DOM styleSheets properly
+                for (var si in document.styleSheets) {
+                    var styleSheet = document.styleSheets[si];
+                    if (!styleSheet.rules) continue;
+
+                    for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
+                        if (!styleSheet.rules[ri].selectorText) continue;
+
+                        if (styleSheet.rules[ri].selectorText.match(':hover')) {
+                            styleSheet.deleteRule(ri);
+                        }
+                    }
+                }
+            } catch (ex) {}
+        }
+
+        if (!('ontouchstart' in document.documentElement)
+            && !navigator.maxTouchPoints
+            && !navigator.msMaxTouchPoints) {
+            document.body.className += ' notouch';
+        }
+    }
 
 });
