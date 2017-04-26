@@ -64,12 +64,6 @@ $(document).ready(function () {
                 }
             } catch (ex) {}
         }
-
-        if (!('ontouchstart' in document.documentElement)
-            && !navigator.maxTouchPoints
-            && !navigator.msMaxTouchPoints) {
-            document.body.className += ' notouch';
-        }
     }
 
 });
