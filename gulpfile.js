@@ -41,7 +41,7 @@ gulp.task('browser-sync', function() { // Создаем таск browser-sync
     //   baseDir: 'wp-content/themes/ace' // Директория для сервера - app
     // },
     port: 8000,
-    proxy: 'ace',
+    proxy: 'localhost/ace', //remove localhost if you don't use MAMP, just 'ace'
     notify: false // Отключаем уведомления
   });
 });
