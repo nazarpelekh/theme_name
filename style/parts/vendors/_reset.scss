@@ -1,5 +1,3 @@
-@import '_flexbox';
-
 $font-base: 20px;
 
 /// Strips the unit from a number.
@@ -22,148 +20,6 @@ $font-base: 20px;
   @return ($pxval / $base) * 1rem;
 }
 
-@mixin placeholder {
-  &::-webkit-input-placeholder { @content; }
-  &:-moz-placeholder           { @content; }
-  &::-moz-placeholder          { @content; }
-  &:-ms-input-placeholder      { @content; }
-}
-
-@mixin column ($width:30%, $count:0, $column_gap:0) {
-  -webkit-column-width: $width;
-  -moz-column-width: $width;
-  column-width: $width;
-
-  -webkit-column-count: $count;
-  -moz-column-count: $count;
-  column-count: $count;
-
-  -webkit-column-gap: $column_gap;
-  -moz-column-gap: $column_gap;
-  column-gap: $column_gap;
-}
-
-@mixin triangle ($width:12px, $height:10px, $color:#000, $direction: top) {
-  position: absolute;
-  content: '';
-  height: 0;
-  width: 0;
-
-  @if $direction == top {
-    border-top: 0;
-    border-left: $width solid transparent;
-    border-right: $width solid transparent;
-    border-bottom: $height solid $color;
-    top: -$height;
-    left: 50%;
-    @include transform(translateX(-50%));
-  } @else if $direction == right {
-    border-right: 0;
-    border-top: $width solid transparent;
-    border-bottom: $width solid transparent;
-    border-left: $height solid $color;
-    right: -$height;
-    top: 50%;
-    @include transform(translateY(-50%));
-  } @else if $direction == bottom {
-    border-bottom: 0;
-    border-left: $width solid transparent;
-    border-right: $width solid transparent;
-    border-top: $height solid $color;
-    bottom: -$height;
-    left: 50%;
-    @include transform(translateX(-50%));
-  } @else {
-    border-left: 0;
-    border-top: $width solid transparent;
-    border-bottom: $width solid transparent;
-    border-right: $height solid $color;
-    left: -$height;
-    top: 50%;
-    @include transform(translateY(-50%));
-  }
-
-}
-
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  -khtml-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  border-radius: $radius;
-}
-
-@mixin box-sizing($boxsize) {
-  -webkit-box-sizing: $boxsize;
-  -moz-box-sizing: $boxsize;
-  -ms-box-sizing: $boxsize;
-  -o-box-sizing: $boxsize;
-  box-sizing: $boxsize;
-}
-
-@mixin background-size($size) {
-  -webkit-background-size: $size;
-  -moz-background-size: $size;
-  -ms-background-size: $size;
-  -o-background-size: $size;
-  background-size: $size;
-}
-
-@mixin box-shadow($styles) {
-  -webkit-box-shadow: $styles;
-  -moz-box-shadow: $styles;
-  -ms-box-shadow: $styles;
-  -o-box-shadow: $styles;
-  box-shadow: $styles;
-}
-
-@mixin transition($property: all, $duration: .4s, $easing: ease) {
-  -webkit-transition: $property $duration $easing;
-  -moz-transition: $property $duration $easing;
-  -ms-transition: $property $duration $easing;
-  -o-transition: $property $duration $easing;
-  transition: $property $duration $easing;
-}
-
-@mixin transform($action, $backface: false) {
-  @if $backface {
-    -webkit-transform: $action;
-    -moz-transform: $action;
-    -ms-transform: $action;
-    -o-transform: $action;
-    transform: $action;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  } @else {
-    -webkit-transform: $action;
-    -moz-transform: $action;
-    -ms-transform: $action;
-    -o-transform: $action;
-    transform: $action;
-  }
-}
-
-@mixin gradient($start: #f1f1f1, $from: 0%, $stop: #d9d9d9, $to: 100%) {
-  background: $start;
-  background: -webkit-gradient(linear, left top, left bottom, from(ie-hex-str($start)), to(ie-hex-str($stop)));
-  background: -moz-linear-gradient(center top, $start $from, $stop $to);
-  background: -moz-gradient(center top, $start $from, $stop $to);
-  background: -webkit-linear-gradient(top, $start $from, $stop $to);
-  background: -o-linear-gradient(top, $start $from, $stop $to);
-  background: -ms-linear-gradient(top, $start $from, $stop $to);
-  background: linear-gradient(to bottom, $start $from, $stop $to);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start)}', endColorstr='#{ie-hex-str($stop)}', GradientType=0);
-}
-
-@mixin user-select($select) {
-  -webkit-touch-callout: $select;
-  -webkit-user-select: $select;
-  -khtml-user-select: $select;
-  -moz-user-select: $select;
-  -ms-user-select: $select;
-  user-select: $select;
-}
-
 @mixin center($horizontal: true, $vertical: true) {
   position: absolute;
   @if ($horizontal and $vertical) {
@@ -183,46 +39,6 @@ $font-base: 20px;
     -moz-transform: translate(0, -50%);
     transform: translate(0, -50%);
   }
-}
-
-@mixin keyframes($name) {
-  @-webkit-keyframes #{$name} {
-    @content;
-  }
-  @-moz-keyframes #{$name} {
-    @content;
-  }
-  @-ms-keyframes #{$name} {
-    @content;
-  }
-  @keyframes #{$name} {
-    @content;
-  }
-}
-@mixin animation ($animation,$duration,$animation-timing-function,$animation-iteration-count) {
-  -webkit-animation-name: $animation;
-  -webkit-animation-duration: $duration;
-  -webkit-animation-timing-function: $animation-timing-function;
-  -webkit-animation-iteration-count: $animation-iteration-count;
-  -webkit-animation-direction: alternate;
-
-  -moz-animation-name: $animation;
-  -moz-animation-duration: $duration;
-  -moz-animation-timing-function: $animation-timing-function;
-  -moz-animation-iteration-count: $animation-iteration-count;
-  -moz-animation-direction: alternate;
-
-  -o-animation-name: $animation;
-  -o-animation-duration: $duration;
-  -o-animation-timing-function: $animation-timing-function;
-  -o-animation-iteration-count: $animation-iteration-count;
-  -o-animation-direction: alternate;
-
-  animation-name: $animation;
-  animation-duration: $duration;
-  animation-timing-function: $animation-timing-function;
-  animation-iteration-count: $animation-iteration-count;
-  animation-direction: alternate;
 }
 
 @mixin declare-font-face($font-family, $font-filename, $font-weight: normal, $font-style: normal) {
@@ -247,7 +63,7 @@ $font-base: 20px;
   }
 }
 
-@include declare-font-face('Helvetica Neue', 'HelveticaNeueCyr-Medium', 500);
+//@include declare-font-face('Helvetica Neue', 'HelveticaNeueCyr-Medium', 500);
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   /* Using @include svg-font-face('FontName', 'font-filename', 400); */
@@ -258,7 +74,7 @@ $font-base: 20px;
   margin: 0;
   padding: 0;
   outline: 0;
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 }
 
 html {
@@ -300,7 +116,7 @@ a img, fieldset, hr {
 a {
   color: #fff;
   text-decoration: none;
-  @include transition(all, 0.4s);
+  transition: all .4s ease;
   &:hover {
     text-decoration: none;
   }
@@ -320,8 +136,8 @@ td {
 }
 
 input, select, textarea {
-  @include box-sizing(border-box);
-  @include transition(all, 0.4s);
+  box-sizing: border-box;
+  transition: all .4s ease;
   border-radius: 0;
   width: 100%;
   -webkit-appearance: none;
@@ -353,30 +169,9 @@ input::-moz-placeholder, textarea::-moz-placeholder {
   opacity: 1;
 }
 
-input, textarea {
-  @include placeholder {
-    color: #999;
-    opacity: 1;
-  }
-}
-
-input:not([type='submit']) {
-  //padding: .5rem;
-  background: #fcfcfc;
-
-  @include placeholder {
-    color: #aaa;
-    line-height: 15px;
-    @include transition();
-
-  }
-
-  &:focus {
-    @include placeholder {
-      line-height: 50px;
-    }
-    background: #f1f1f1;
-  }
+input::placeholder, textarea::placeholder {
+  color: #999;
+  opacity: 1;
 }
 
 hr {
@@ -489,7 +284,7 @@ $menu_color: #fff;
   position: absolute;
   right: 0;
   top: 29px;
-  @include transition();
+  transition: all .4s ease;
   width: 23px;
   z-index: 2000;
   &:before, &:after {
@@ -503,21 +298,21 @@ $menu_color: #fff;
     position: absolute;
     right: 0;
     top: 0;
-    @include transition();
+    transition: all .4s ease;
   }
   &:after {
     border-radius: 10px;
-    @include box-shadow(0 3px 0 0 $menu_color);
+    box-shadow: 0 3px 0 0 $menu_color;
     content: "";
     height: 3px;
     position: absolute;
     top: 6px;
-    @include transition();
+    transition: all .4s ease;
   }
   &.active:before, &.active:after {
     border-radius: 10px;
     background: $menu_color;
-    @include box-shadow(none);
+    box-shadow: none;
     left: 0;
     right: 0;
     top: 0;
@@ -526,13 +321,13 @@ $menu_color: #fff;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
-    @include transform(rotate(-45deg) translate(-7px, 7px));
+    transform: rotate(-45deg) translate(-7px, 7px);
   }
   &.active:after {
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
-    @include transform(rotate(45deg) translate(7px, 7px));
+    transform: rotate(45deg) translate(7px, 7px);
   }
 }
 // menu
@@ -762,10 +557,10 @@ div.wpcf7 {
     padding: 0 12px;
     display: block;
     height: 49px;
-    @include border-radius(5px);
+    border-radius: 5px;
     margin: 0 auto 20px;
     font: 400 16px $font;
-    @include placeholder {color: #999;}
+    &::placeholder {color: #999;}
     &:focus {
       background: rgba(8, 97, 149, 0.08);
     }
@@ -780,9 +575,24 @@ div.wpcf7 {
 
 // contact form 7 validation
 
+html {
+  font-size: $font-base;
+}
 
-// fontastic
+body {
+  font-family: $font, sans-serif;
+  font-weight: 400;
+  background: #fff;
+}
 
+main {
+  overflow: hidden;
+  position: relative;
+}
 
-
-// fontastic
+.wrap {
+  margin: 0 auto;
+  width: $pageWidth;
+  max-width: 94%;
+  position: relative;
+}

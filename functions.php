@@ -509,15 +509,11 @@ add_action('acf/init', 'my_acf_init');
 
 
 function soc(){ ?>
-    <div class="soc">
-        <?php if ($twit = get_field("twit","option")) { ?>
-            <a class="icon-twitter" href="<?php echo $twit; ?>" target="_blank"></a>
-        <?php } ?>
-        <?php if ($face = get_field("face","option")) { ?>
-            <a class="icon-facebook" href="<?php echo $face; ?>" target="_blank"></a>
-        <?php } ?>
-        <?php if ($google = get_field("google","option")) { ?>
-            <a class="icon-google-plus" href="<?php echo $google; ?>" target="_blank"></a>
-        <?php } ?>
-    </div>
+	<?php if ($social = get_field('social_links', 'option' )) { ?>
+        <div class="soc">
+			<?php foreach ($social as $s) { ?>
+                <a class="fa fa-<?php echo $s['icon_name'] ?>" href="<?php echo $s['link']; ?>" target="_blank" aria-hidden="true"></a>
+			<?php } ?>
+        </div>
+	<?php } ?>
 <?php } ?>

@@ -1,4 +1,5 @@
 var autoprefixer = require('autoprefixer');
+var notify = require('gulp-notify');
 var assets  = require('postcss-assets');
 var gulp = require('gulp');
 var livereload = require('gulp-livereload');
@@ -10,29 +11,29 @@ var webserver = require('gulp-webserver');
 
 
 var handleError = function (err) {
-  console.log(err.name, ' in ', err.plugin, ': ', err.message);
-  console.log(err.getStack());
-  process.exit(1);
+    console.log(err.name, ' in ', err.plugin, ': ', err.message);
+    // console.log(err.getStack());
+    process.exit(1);
 };
 
 
 gulp.task('sass', function () {
 
-  var processors = [
-    assets({
-      basePath: '/wp-content/themes/ace',
-      loadPaths: ['fonts/', 'images/']
-    }),
-    autoprefixer
-  ];
+    var processors = [
+        assets({
+            basePath: '/wp-content/themes/welness',
+            loadPaths: ['fonts/', 'images/']
+        }),
+        autoprefixer
+    ];
 
-  return gulp.src('wp-content/themes/ace/style/*.scss')
-    .pipe(sass({
-      outputStyle: 'compact' // :nested, :expanded, :compact, :compressed
-    }).on('error', handleError))
-    .pipe(postcss(processors).on('error', handleError))
-    .pipe(gulp.dest('wp-content/themes/ace/style'))
-    .pipe(browserSync.reload({stream: true})) // Обновляем CSS на странице при изменении
+    return gulp.src('wp-content/themes/welness/style/style.scss')
+        .pipe(sass({
+                outputStyle: 'compact' // :nested, :expanded, :compact, :compressed
+            }).on('error', notify.onError('<%= error.message %>'))
+        )
+        .pipe(gulp.dest('wp-content/themes/welness/style'))
+        .pipe(browserSync.reload({stream: true})) // Обновляем CSS на странице при изменении
 });
 
 gulp.task('browser-sync', function() { // Создаем таск browser-sync
